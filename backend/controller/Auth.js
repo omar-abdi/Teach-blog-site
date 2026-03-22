@@ -43,7 +43,7 @@ if(existUsername){
 //hubi in paswordka k yaryhy 6 xaraf
 if(password.length <6){
     return res.status(404).json({
-        error: "User must be at lest  7 character "
+        error: "Password must be at lest  7 character "
     })
 }
 //4hubi in in uu passwordka encyptjs yhy 
@@ -58,6 +58,7 @@ const newUser = await new User({
 if(newUser){
     await newUser.save()
     return res.status(200).json({
+        messaage: "User Register Successfully",
         _id: newUser._id,
         username : newUser.username,
         fullName : newUser.fullName ,
