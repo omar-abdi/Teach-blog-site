@@ -1,6 +1,7 @@
 import User from "../Modal/User.js"
 
 import bcryptjs from "bcryptjs"
+import { generateToken } from "../utils/Token.js"
 
 export const RegisterUser=  async(req , res)=>{
 
@@ -48,6 +49,7 @@ if(password.length <6){
 }
 //4hubi in in uu passwordka encyptjs yhy 
 const  hashhPassword =    bcryptjs.hashSync(password , 10)
+ 
 
 const newUser = await new User({
     username ,
@@ -56,7 +58,9 @@ const newUser = await new User({
     password: hashhPassword
 })
 if(newUser){
+
     await newUser.save()
+    generateToken(newUser._id , res)
     return res.status(200).json({
         messaage: "User Register Successfully",
         _id: newUser._id,
