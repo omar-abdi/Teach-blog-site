@@ -84,3 +84,40 @@ if(newUser){
     
 }
 }
+export const Login = async(req , res)=>{
+   try {
+     const {email ,  password} = req.body
+     const user = await User.findOne({email})
+     if(!user){
+        return res.status(404).json({
+            Error: "this Account not found"
+
+        })
+     }
+     const isMatch = await bcryptjs.compare(password , user.password)
+     if(!isMatch){
+          return res.status(404).json({
+            Error: "invalit credential"
+
+        })
+   
+
+     }
+      generateToken(user._id , res)
+     res.status(200).json({
+        messaage: "User login Successfully",
+        _id: user._id,
+        username : user.username,
+        fullName : user.fullName ,
+        email: user.email,
+
+        
+    })
+   } catch (error) {
+     console.log("Error " ,error.message)
+    res.status(500).json({
+        message: error.message
+    })
+    
+   }
+}
