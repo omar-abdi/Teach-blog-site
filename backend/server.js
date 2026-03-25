@@ -4,10 +4,16 @@ import AuthRouter from "./routes/Auth.js"
 import dbConnect from "./Config/db.js"
 import postRouter from "./routes/postRouter.js"
 import cookieParser from "cookie-parser"
+import {v2 as cloudinary} from "cloudinary"
 const app = express()
 dotenv.config()
 app.use(express.json())
 app.use(cookieParser())
+cloudinary.config({
+    cloud_name :  process.env.CLOUDINARY_NAME,
+    cloud_api: process.env.CLOUDINARY_API,
+    cloud_secret: process.env.CLOUDINARY_SECRET
+})
 
 app.use("/api/users" , AuthRouter)
 app.use("/api/posts" , postRouter)
