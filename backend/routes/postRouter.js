@@ -7,6 +7,6 @@ router.post("/create" ,  protect ,createPost )
 router.get("/" ,getAllPost )
 router.get("/:id", getPost )
 router.put("/:id",   protect ,updatePost )
-router.delete("/:id"  , deletePost)
+router.delete("/:id" , protect, deletePost)
 
 export default router

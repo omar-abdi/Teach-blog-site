@@ -107,4 +107,36 @@ export const updatePost = async(req , res)=>{
       
    }
 }
-export const deletePost = async()=>{}
+export const deletePost = async(req , res)=>{
+   try {
+      const post = await Post.findById(req.params.id)
+      if(!post){
+         return res.status(404).json({
+            message : "post not foud"
+         })
+      }
+      if(post.Author.toString() !== req.user.id.toString()){
+          return  res.status(404).json({error: "unuthorized in this post !"})
+
+      }
+      // image ka delete
+
+      if(post.image){
+         const imageId = post.image.split("/").pop().slit(".")[0]
+         await cloudinary.uploader.destroy(imageId)
+
+      }
+    await Post.findByIdAndDelete(req.params.id)
+
+    return res.status(200).json({
+      message: "successfully deleted this post "
+    })
+
+
+   } catch (error) {
+        console.error(`error accur in delete  method ${error.message}`)
+        res.status(500).json({error: "internal server error"})
+      
+      
+   }
+}
