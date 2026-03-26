@@ -140,3 +140,21 @@ export const deletePost = async(req , res)=>{
       
    }
 }
+export const getUserPost =  async(req , res)=>{
+   try {
+    const {username} = req.params
+    const user = await User.findOne({username})
+
+   if(!user){
+         return  res.status(404).json({error: "not found user"})
+
+      }
+      const posts = await Post.find({Author: user._id}).sort({createdAt: -1}).populate({path: "Author" , select: "-password"})
+      res.json(posts)
+   } catch (error) {
+       console.error(`error accur in delete  method ${error.message}`)
+        res.status(500).json({error: "internal server error"})
+
+      
+   }
+}
