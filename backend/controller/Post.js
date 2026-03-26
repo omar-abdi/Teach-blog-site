@@ -42,7 +42,69 @@ if(image){
         res.status(404).json({error: "internal server error"})
   }
 }
-export const getAllPost = async()=>{}
-export const getPost = async()=>{}
-export const updatePost = async()=>{}
+export const getAllPost = async(req , res)=>{
+   try {
+      const posts = await Post.find().sort({createdAt: -1}).populate({path: "Author" ,select:"-password"}) //with out 
+      if(posts.length === 0){
+         return res.status(200).json([])
+      }
+      return res.status(200).json(posts)
+      
+   } catch (error) {
+       console.error(`error accur in get method ${error.message}`)
+        res.status(404).json({error: "internal server error"})
+      
+   }
+}
+export const getPost = async(req , res)=>{
+   try {
+      const post = await Post.findById(req.params.id).populate({
+         path:  "Author" ,
+           select: "-password"
+         })
+
+      if(!post){
+     return res.status(404).json({error: "past not found"}) 
+      }
+      return res.status(200).json(post)
+   } catch (error) {
+       console.error(`error accur in getbyid method ${error.message}`)
+        res.status(500).json({error: "internal server error"})
+      
+      
+   }
+}
+export const updatePost = async(req , res)=>{
+   try {
+      const {id} = req.params;
+      const {title , content , category} = req.body
+      let {image} = req.body;
+      //soo heli qof wax update greynaa idiga
+      const userId = req.user._id.toString();
+      //sooo hel post iga
+      const post = await Post.findById(id)
+      if(!post){
+         return  res.status(404).json({error: "not found post"})
+
+      }
+      if(post.Author.toString() !== userId){
+           return  res.status(404).json({error: "unuthorized in this post !"})
+
+      }
+      if(!image && !title && !content && !category){
+           return  res.status(404).json({error: "At lest one fiald must be updted"})
+      }
+      if(image&image !== post.image){
+         const updatedImage = cloudinary.uploader.upload(image)
+         const image= updatedImage.secure_url
+      }
+      const updatedData = await Post.findByIdAndUpdate(id , {title , content , category , image}, {new : true})
+      return res.status(200).json(updatedData)
+   } catch (error) {
+      console.error(`error accur in update method ${error.message}`)
+        res.status(500).json({error: "internal server error"})
+      
+      
+   }
+}
 export const deletePost = async()=>{}

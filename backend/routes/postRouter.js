@@ -6,7 +6,7 @@ const router = Router()
 router.post("/create" ,  protect ,createPost )
 router.get("/" ,getAllPost )
 router.get("/:id", getPost )
-router.put("/:id", updatePost )
+router.put("/:id",   protect ,updatePost )
 router.delete("/:id"  , deletePost)
 
 export default router
