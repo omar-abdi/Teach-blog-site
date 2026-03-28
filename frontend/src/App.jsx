@@ -12,9 +12,9 @@ import PostList from './pages/PostList'
 import Editpost from './pages/Editpost'
 
 function App() {
-  const currentUser = true
+  const currentUser = false
   return (
-    <div>
+    <div className='font-mono'>
     
 
 
