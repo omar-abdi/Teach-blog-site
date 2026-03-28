@@ -13,6 +13,13 @@ function Signup() {
          <form className='text-slate-800 flex flex-col gap-5   text-slate-800' >
 
             <div >
+                <label  className='block my-2'>fullNmae:</label>
+                <div>
+                    <input type="text"  placeholder='Enter fullName' className='w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition'/>
+                </div>
+
+            </div>
+            <div >
                 <label  className='block my-2'>Username:</label>
                 <div>
                     <input type="text"  placeholder='Enter Username' className='w-full p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition'/>
@@ -35,7 +42,7 @@ function Signup() {
             </div>
 
            <button className="bg-black text-white p-3 rounded-lg hover:bg-slate-800 transition">
-    Sign in
+    Signup
   </button>
   <p className="text-center text-sm text-slate-500">
 Already  have an account? <span className="underline cursor-pointer"><Link to="/login">Signup</Link></span>
