@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux'
+
+
 
  function Navbar() {
   const [open, setOpen] = useState(false);
-
+const currentUser = useSelector((state)=> state.currentUser)
   return (
     <nav className="bg-gray-800 text-white shadow-md">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
@@ -15,7 +18,10 @@ import { Link } from "react-router-dom";
           <Link to="/">Home</Link>
           <Link to="/blogs">Blogs</Link>
           <Link to="/contact">Contact</Link>
-          <Link to="/login">Sign in</Link>
+          {!currentUser  ?   <Link to="/login">Sign in</Link>  : <Link to="/dash">Dashbroad</Link>
+          
+        }
+         
         </div>
 
         {/* Mobile Button */}

@@ -1,4 +1,6 @@
 import { createSlice   , createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit"
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'; //
 
 
 export const Login = createAsyncThunk("user/login" , async(userInfo , {rejectWithValue})=>{
@@ -29,9 +31,11 @@ body: JSON.stringify(userInfo)
     })
 const data = await res.json()
     if(!res.ok || data.error){
+     
         return rejectWithValue(data.error || "Registration is failed")
     }
     return data
+      toast.success("Successfully Registered")
 })
 const getInitialState = ()=>{
     if(typeof window !== "undefined"){

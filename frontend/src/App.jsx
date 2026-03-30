@@ -10,9 +10,11 @@ import Dashbrod from './pages/Dashbrod'
 import Signup from './pages/Signup'
 import PostList from './pages/PostList'
 import Editpost from './pages/Editpost'
+import { useSelector } from 'react-redux'
 
 function App() {
-  const currentUser = false
+
+  const currentUser = useSelector((state)=> state.currentUser)
   return (
     <div className='font-mono'>
     
