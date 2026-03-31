@@ -5,9 +5,11 @@ import dbConnect from "./Config/db.js"
 import postRouter from "./routes/postRouter.js"
 import cookieParser from "cookie-parser"
 import {v2 as cloudinary} from "cloudinary"
+import cors from "cors"
 const app = express()
 dotenv.config()
 app.use(express.json())
+app.use(cors())
 app.use(cookieParser())
 cloudinary.config({
     cloud_name :  process.env.CLOUDINARY_NAME,

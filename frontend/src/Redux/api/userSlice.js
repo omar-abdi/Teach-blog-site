@@ -1,41 +1,28 @@
-import { createSlice   , createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit"
+import { createSlice   , createAsyncThunk } from "@reduxjs/toolkit"
+import { isRejectedWithValue } from "@reduxjs/toolkit" 
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'; //
-
+import axios from "axios"
 
 export const Login = createAsyncThunk("user/login" , async(userInfo , {rejectWithValue})=>{
-    const response = await fetch("api/users/login" ,{
-        method :"POST",
-      headers: {
-    "Content-Type": "application/json"
-},
-body: JSON.stringify(userInfo)
-
-    })
-   const data = await res.json()
-    if(!response.ok || data.error){
-           return rejectWithValue(data.error || "login is failed")
-    }
-    return data
+    const response = await axios.post("api/users/login" , userInfo)
+   const data = response.data
+   if(data.error){
+      return rejectWithValue(data.error || "Login is failed")
+   }
+   return data
+    
 
 
 })
 export const Register = createAsyncThunk("user/signup" , async(userInfo, {rejectWithValue})=>{
-    const res = await fetch("api/users/signup" ,{
-        method :"POST",
-      headers: {
-    "Content-Type": "application/json"
-},
-
-body: JSON.stringify(userInfo)
-    })
-const data = await res.json()
-    if(!res.ok || data.error){
-     
-        return rejectWithValue(data.error || "Registration is failed")
-    }
-    return data
-      toast.success("Successfully Registered")
+    const res = await axios.post("api/users/signup" , userInfo)
+ const data =  res.data
+   if(data.error){
+      return rejectWithValue(data.error || "Registration is failed")
+   }
+   return data
+    
 })
 const getInitialState = ()=>{
     if(typeof window !== "undefined"){

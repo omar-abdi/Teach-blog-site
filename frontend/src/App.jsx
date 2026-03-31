@@ -28,7 +28,7 @@ function App() {
       <Route path='/contact' element={<Contact/>} />
       <Route path='/blogs/:id' element={<Blogpost/>} />
       <Route path='/login' element={currentUser ? <Navigate to ="/dash" /> : <Singin/>} />
-      <Route path='/signup' element={currentUser ? <Navigate to ="/dash" /> : <Signup/>} />
+      <Route path='/signup' element={currentUser ? <Navigate to ="/login" /> : <Signup/>} />
 
 
         <Route path='/dash' element={currentUser ? <Dashbrod/>: <Navigate to = "login"/>} >

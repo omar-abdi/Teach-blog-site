@@ -38,8 +38,10 @@ const currentUser = useSelector((state)=> state.currentUser)
         <div className="md:hidden flex flex-col gap-4 px-4 pb-4 bg-blue-600">
           <Link to="/" onClick={() => setOpen(false)}>Home</Link>
           <Link to="/blogs" onClick={() => setOpen(false)}>Blogs</Link>
-          <Link to="/contact" onClick={() => setOpen(false)}>Contactt</Link>
-          <Link to="/login" onClick={() => setOpen(false)}>Sign in</Link>
+          <Link to="/contact" onClick={() => setOpen(false)}>Contact</Link>
+       {!currentUser  ?   <Link to="/login" onClick={()=> setOpen(false)}>Sign in</Link>  : <Link to="/dash" onClick={()=> setOpen(false)}>Dashbroad</Link>
+          
+        }
         </div>
       )}
     </nav>
