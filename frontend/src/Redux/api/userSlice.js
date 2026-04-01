@@ -57,6 +57,7 @@ export const userSlice = createSlice({
             state.status = "success",
             state.currentUser= action.payload
             localStorage.setItem("user" , JSON.stringify(action.payload))
+                localStorage.setItem("token" , JSON.stringify(action.payload))
         }).addCase(Login.rejected , (state , action)=>{
             state.status = "failed",
             state.error = action.error.message
@@ -68,6 +69,7 @@ export const userSlice = createSlice({
             state.status = "success",
             state.currentUser= action.payload
             localStorage.setItem("user" , JSON.stringify(action.payload))
+            localStorage.setItem("token" , JSON.stringify(action.payload))
         }).addCase(Register.rejected , (state , action)=>{
             state.status = "failed",
             state.error = action.error.message
