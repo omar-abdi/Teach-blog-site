@@ -1,8 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Link} from "react-router-dom"
 import {FaEdit, FaRegTrashAlt} from "react-icons/fa"
 import { BiDotsVerticalRounded } from "react-icons/bi"
+import { useSelector } from 'react-redux'
+import axios from 'axios'
+import moment from "moment"
+
+
+
 function PostList() {
+  const currentUser = useSelector((state)=>state.currentUser)
+ 
+  const [posts , setPosts] = useState([])
+useEffect(() => {
+  const getPostfunction = async () => {
+    try {
+      const res = await axios.get(`http://localhost:3000/api/posts/user/${currentUser.username}`);
+      setPosts(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+ getPostfunction()     
+}, [currentUser]);
+ 
+
+
   return (
     <div className='space-y-4'>
       <h1 className='text-2xl text-slate-800 font-bold hidden md:block'>post list</h1>
@@ -12,11 +36,11 @@ function PostList() {
       {/* post lis */}
 
       <div className='space-y-4'>
-        {/* past item */}
-        <div className=' p-4 border-r border-l border-blue-900 items-center flex gap-4 justify-betweeen'>
+      {posts.map((post , index)=>(
+         <div key={index}    className=' p-4 border-r border-l border-blue-900 items-center flex gap-4 justify-betweeen'>
         <div className='flex-1'>
-          <h1 className='text-xl font-bold'>post titel : 01</h1>
-          <p className='text-slate-700 '>bublush post at : 10/10/2026</p>
+          <h1 className='text-xl font-bold'>{post.title}</h1>
+          <p className='text-slate-700 '>bublush p{moment(post.createdAt).format("d-MM-YYYY")}</p>
 
         </div>
         {/* desktop */}
@@ -46,6 +70,9 @@ function PostList() {
 
         </div>
         </div>
+        
+      ))}
+       
         
       </div>
     </div>
