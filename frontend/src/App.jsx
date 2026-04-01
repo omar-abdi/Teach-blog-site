@@ -11,6 +11,7 @@ import Signup from './pages/Signup'
 import PostList from './pages/PostList'
 import Editpost from './pages/Editpost'
 import { useSelector } from 'react-redux'
+import CreatePost from './pages/CreatePost'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
         <Route path='/dash' element={currentUser ? <Dashbrod/>: <Navigate to = "login"/>} >
         <Route    index element={<Navigate  to = "posts"  replace/>}  />
         <Route  path='posts'   element={<PostList/>}  />
+        <Route  path='create post'   element={<CreatePost/>}  />
         <Route  path='Editpost/:id'   element={<Editpost/>}  />
         </Route>
     </Routes>
