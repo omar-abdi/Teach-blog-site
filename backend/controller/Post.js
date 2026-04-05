@@ -88,7 +88,7 @@ export const updatePost = async(req , res)=>{
 
       }
       if(post.Author.toString() !== userId){
-           return  res.status(404).json({error: "unuthorized in this post !"})
+           return  res.status(404).json({error: "unuthorized in this post ! !"})
 
       }
       if(!image && !title && !content && !category){

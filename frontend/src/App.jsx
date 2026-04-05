@@ -36,7 +36,7 @@ function App() {
         <Route    index element={<Navigate  to = "posts"  replace/>}  />
         <Route  path='posts'   element={<PostList/>}  />
         <Route  path='create post'   element={<CreatePost/>}  />
-        <Route  path='Editpost/:id'   element={<Editpost/>}  />
+        <Route  path='editpost/:id'   element={<Editpost/>}  />
         </Route>
     </Routes>
 
