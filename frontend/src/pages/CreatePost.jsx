@@ -76,7 +76,11 @@ const handleSubmit = async(e)=>{
     <div className='space-y-2' >
       {/* content input */}
 <label  className='block text-sm font-medium text-gray-800' htmlFor='category'>Content :</label>
-<ReactQuill  name='content' onChange={(content)=> setFormData({...formData , content})}    placeholder='Your post Content' className='mb-12'/>
+<ReactQuill  name='content'  onChange={(value)=>
+  setFormData((prev)=>({...prev , content: value}))} 
+    value={formData.content}   placeholder='Your post Content' className='mb-12'
+
+  />
     </div>
     <button  type='submit'       className='w-full md:w-1/2 bg-gray-700 shadow-lg rounded-lg px-6 py-3 text-white hover:bg-gray-900'>Post </button>
   </form>
