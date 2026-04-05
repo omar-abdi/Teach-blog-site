@@ -5,11 +5,13 @@ import { BiDotsVerticalRounded } from "react-icons/bi"
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import moment from "moment"
+import { useNavigate } from 'react-router-dom'
 
 
 
 
 function PostList() {
+  const naviagte = useNavigate()
   const currentUser = useSelector((state)=>state.currentUser)
  
   const [posts , setPosts] = useState([])
@@ -74,7 +76,7 @@ useEffect(() => {
             <Link to= "/dash/Editpost/:id" className='flex items-center gap-2 p-2 bg-gary-100'>
             <FaEdit size={20}/> Edit
             </Link>
-            <button  onClick={()=>deletePosts(post._id)} className='flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md'>
+            <button  onClick={()=>deletePosts(post._id)} className={` title ? && "animate-sping"  : flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md`}>
               <FaRegTrashAlt size={20}/>delete
             </button>
 

@@ -7,7 +7,7 @@ export const createPost = async(req , res)=>{
    // destructuring ku samey kala soo bax  modals ka body iga
   try {
      const {title ,    content ,  category } = req.body ;
-  
+  // image soo hel as distructure ahaan 
 let {image} = req.body
    //soo hel userka loginka ah id giiisa 
 

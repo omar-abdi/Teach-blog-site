@@ -31,7 +31,7 @@ if (!emailRegex.test(email)) {
 const existEmail =  await  User.findOne({email})
 if(existEmail){
     return res.status(404).json({
-        error: "User with this email Already Exist "
+        error: `${existEmail} with this email Already Exist `
     })
 }
 //5 hubi in uuu hore u jiray username
