@@ -23,6 +23,12 @@ export const Register = createAsyncThunk("user/signup" , async(userInfo, {reject
    }
    return data
     
+});
+export const LogOut = createAsyncThunk("user/logout" , async()=>{
+    const res = await axios.post("/api/users/logout")
+    const data = res.data
+    return data
+    
 })
 const getInitialState = ()=>{
     if(typeof window !== "undefined"){
@@ -73,6 +79,12 @@ export const userSlice = createSlice({
         }).addCase(Register.rejected , (state , action)=>{
             state.status = "failed",
             state.error = action.error.message
+        }).addCase(LogOut.fulfilled , (state , action)=>{
+            state.status= "success",
+            state.error= null,
+            state.currentUser= null
+            localStorage.removeItem("user")
+            localStorage.removeItem("token")
         })
 
     }

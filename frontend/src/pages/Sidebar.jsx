@@ -7,12 +7,14 @@ import { TbLogs } from "react-icons/tb"
 import { IoIosCreate } from "react-icons/io"
 import { LuLogOut } from "react-icons/lu"
 import { useNavigate } from 'react-router-dom'
-
+import { LogOut } from '../Redux/api/userSlice'
+import { useDispatch } from 'react-redux'
 function Sidebar() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
     const [isOpen , setIsOpen] = useState(true)
     const logOut = ()=>{
-      alert("logouted")
+  dispatch(LogOut())
     }
 const menueItems = [
   { name: "Dashboard", icon: FiHome, path: "/dash" },
