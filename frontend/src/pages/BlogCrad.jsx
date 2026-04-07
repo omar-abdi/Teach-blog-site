@@ -5,7 +5,7 @@ function BlogCrad({blog}) {
   return ( 
     <Link 
   to={`/blogs/${blog._id}`}    
-  className='block max-w-md mx-auto bg-white border border-gray-200 rounded-2xl p-4 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 hover:cursor-pointer'
+  className='block max-w-md mx-auto bg-white border border-gray-200 rounded-2xl p-4 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 r'
 >
 
   <div className="flex justify-center mb-4">
