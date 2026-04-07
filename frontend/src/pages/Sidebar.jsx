@@ -43,7 +43,7 @@ const menueItems = [
   </div>
 <nav> 
   {menueItems.map((item , index)=>(
-     <div className=' '>
+     <div key={index}>
     <button   onClick={()=> item.action ? item.action() : item.path && navigate (item.path)} className='flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700'>
       <item.icon className=' w-6 h-6'/>
         {isOpen &&<span>{item.name}</span>}

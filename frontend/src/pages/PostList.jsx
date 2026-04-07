@@ -29,15 +29,16 @@ useEffect(() => {
 }, [currentUser]);
  
 
- const deletePosts = (id)=>{
+ const deletePosts = async(id)=>{
 
   try {
-   axios.delete(`/api/posts/${id}`)
+    const res = await  axios.delete(`/api/posts/${id}`)
+    const dat = res.data()
      setPosts(posts.filter((p)=> p._id !==id));
     
     
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
     
   }
  }
