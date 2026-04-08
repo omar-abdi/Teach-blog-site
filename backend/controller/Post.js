@@ -44,6 +44,7 @@ if(image){
 }
 export const getAllPost = async(req , res)=>{
    try {
+      const limit =  
       const posts = await Post.find().sort({createdAt: -1}).populate({path: "Author" ,select:"-password"}) //with out 
       if(posts.length === 0){
          return res.status(200).json([])
