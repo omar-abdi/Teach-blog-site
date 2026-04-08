@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
   const [open, setOpen] = useState(false);
 const currentUser = useSelector((state)=> state.currentUser)
   return (
-    <nav className="bg-gray-800 text-white shadow-md">
+    <nav className="bg-gray-800 text-white shadow-md z-100">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
         
         {/* Logo */}
