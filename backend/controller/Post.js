@@ -44,12 +44,14 @@ if(image){
 }
 export const getAllPost = async(req , res)=>{
    try {
-      const limit =  
+   //   const limit = parseInt(req.query.limit)||6
+   //   const skip = parseInt(req.query.skip)||6
       const posts = await Post.find().sort({createdAt: -1}).populate({path: "Author" ,select:"-password"}) //with out 
       if(posts.length === 0){
          return res.status(200).json([])
       }
-      return res.status(200).json(posts)
+      // const totalPosts = await Post.countDocuments()
+     return res.status(200).json(posts);
       
    } catch (error) {
        console.error(`error accur in get method ${error.message}`)

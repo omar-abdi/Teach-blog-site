@@ -15,15 +15,15 @@ function Home() {
                   setPost(data[0]);
                   setPosts(data);
               } catch (error) {
-                  console.error("Error fetching post:", error);
+                  console.error("Error fetching post:", error.message);
               }
           };
           GetPosts();
       }, []);
-  
-     if(!post){
-      return <h1>loding</h1>
-     }
+  if (!posts || posts.length === 0) {
+    return <h1>Loading...</h1>;
+}
+    
   return (
     <div className='container mx-auto overflow-hidden p-4'>
 <Hero post = {post}/>

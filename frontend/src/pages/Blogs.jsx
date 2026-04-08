@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState , useEffect } from 'react';
 import GridPost from './GridPost';
+import axios from 'axios';
 function Blogs() {
 
      const [posts, setPosts] = useState([]);
@@ -8,8 +9,8 @@ function Blogs() {
         useEffect(() => {
             const GetPosts = async () => {
                 try {
-                    const res = await fetch("/api/posts");
-                    const data = await res.json();
+                    const res = await axios.get("/api/posts");
+                    const data = await res.data;
                   
                     setPosts(data);
                 } catch (error) {
