@@ -137,3 +137,36 @@ export const Login = async(req , res)=>{
     
    }
 }
+
+export const UpdateUser = async (req, res) => {
+  try {
+    const { username, fullName, email, password } = req.body;
+    const id = req.user._id;
+
+    const setFields = {
+      username,
+      fullName,
+      email,
+    };
+
+    if (password && password.trim() !== "") {
+      setFields.password = bcryptjs.hashSync(password, 10);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { $set: setFields },
+      { new: true }
+    ).select("-password");
+
+    return res.status(200).json({
+        message:"update successfully",
+       user: updatedUser
+  });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+

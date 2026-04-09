@@ -12,6 +12,7 @@ import PostList from './pages/PostList'
 import Editpost from './pages/Editpost'
 import { useSelector } from 'react-redux'
 import CreatePost from './pages/CreatePost'
+import Profile from './pages/Profile'
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
         <Route  path='posts'   element={<PostList/>}  />
         <Route  path='create post'   element={<CreatePost/>}  />
         <Route  path='editpost/:id'   element={<Editpost/>}  />
+        <Route  path='profile'   element={<Profile/>}  />
         </Route>
     </Routes>
 
