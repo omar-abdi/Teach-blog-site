@@ -36,7 +36,7 @@ function Profile() {
           e.preventDefault()
           try {
              const res =await axios.put("/api/users" , formdata)
-             const data =  await res.data
+             const data = res.data
              setFormData(data)
           } catch (error) {
             console.log(error.message)
