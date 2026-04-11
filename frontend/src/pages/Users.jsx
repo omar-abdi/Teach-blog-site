@@ -19,6 +19,7 @@ function Users() {
     try {
       const res = await axios.get("/api/users");
 setUsers(res.data.users);
+
     } catch (err) {
       console.error(err);
     }
@@ -28,7 +29,9 @@ useEffect(() => {
 
  getPostfunction()     
 }, [currentUser]);
- 
+
+
+ console.log(currentUser)
 
 //  const deletePosts = async(id)=>{
 
@@ -43,7 +46,7 @@ useEffect(() => {
     
 //   }
 //  }
-if(users.length <1){
+if(users.length <0){
     return <h1>loading</h1>
 }
   return (

@@ -7,7 +7,7 @@ export const RegisterUser=  async(req , res)=>{
 
 try {
         //xogta body ga laga sooo laga soo diray
-    const {username , fullName , email , password} = req.body
+    const {username , fullName , email , password , isAdmin} = req.body
 
     //2 hubi in ay inputs la buuxi iyo mid ka mid ah maran yahy ama dhaman ay maran yihin
     if(!username || !fullName || !email || !password){
@@ -55,7 +55,8 @@ const newUser = await new User({
     username ,
     fullName,
     email,
-    password: hashhPassword
+    password: hashhPassword,
+    isAdmin
 })
 if(newUser){
 
@@ -67,7 +68,8 @@ if(newUser){
         username : newUser.username,
         fullName : newUser.fullName ,
         email: newUser.email,
-
+        isAdmin: newUser.isAdmin,
+   
         
     })
 }
@@ -110,6 +112,8 @@ export const Login = async(req , res)=>{
         username : user.username,
         fullName : user.fullName ,
         email: user.email,
+          isAdmin: user.isAdmin,
+       
 
         
     })

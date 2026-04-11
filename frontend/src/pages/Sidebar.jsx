@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { userSlice } from '../Redux/api/userSlice'
 import {FiChevronRight} from "react-icons/fi"
 import {IoMdArrowRoundBack} from "react-icons/io"
 import { Link } from 'react-router-dom'
@@ -9,7 +10,10 @@ import { LuLogOut } from "react-icons/lu"
 import { useNavigate } from 'react-router-dom'
 import { LogOut } from '../Redux/api/userSlice'
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 function Sidebar() {
+  const currentUser =  useSelector((state)=>state.currentUser)
+  console.log(currentUser);
   const dispatch = useDispatch()
   const navigate = useNavigate()
     const [isOpen , setIsOpen] = useState(true)
@@ -21,9 +25,11 @@ const menueItems = [
   { name: "Posts", icon: TbLogs, path: "/dash/posts" },
   { name: "Create Posts", icon: IoIosCreate, path: "/dash/create post" },
   { name: "Profile", icon: FiUser, path: "/dash/profile" },
-  { name: "users", icon: FiUser, path: "/dash/users" },
+  ...(currentUser.isAdmin?
+    [{ name: "users", icon: FiUser, path: "/dash/users" }]:[]),
   { name: "Logout", icon: LuLogOut, action: logOut },
 ]
+
   return (
     <div className={`bg-gray-800 sticky top-0 h-screen text-white  relative    ${isOpen ? "w-64 " : "w-20"}`}>
   
