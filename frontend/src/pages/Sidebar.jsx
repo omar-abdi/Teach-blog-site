@@ -21,6 +21,7 @@ const menueItems = [
   { name: "Posts", icon: TbLogs, path: "/dash/posts" },
   { name: "Create Posts", icon: IoIosCreate, path: "/dash/create post" },
   { name: "Profile", icon: FiUser, path: "/dash/profile" },
+  { name: "users", icon: FiUser, path: "/dash/users" },
   { name: "Logout", icon: LuLogOut, action: logOut },
 ]
   return (

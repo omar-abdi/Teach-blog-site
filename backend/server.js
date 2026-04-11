@@ -5,6 +5,7 @@ import dbConnect from "./Config/db.js"
 import postRouter from "./routes/postRouter.js"
 import cookieParser from "cookie-parser"
 import {v2 as cloudinary} from "cloudinary"
+import usersRouter from "./routes/users.js"
 import cors from "cors"
 const app = express()
 dotenv.config()
@@ -20,6 +21,7 @@ cloudinary.config({
 
 app.use("/api/users" , AuthRouter)
 app.use("/api/posts" , postRouter)
+app.use("/api/users" , usersRouter)
 const PORT = process.env.PORT||4000
 
 app.listen(PORT, ()=>{

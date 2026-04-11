@@ -1,0 +1,105 @@
+import React, { useEffect, useState } from 'react'
+import {Link} from "react-router-dom"
+import {FaEdit, FaRegTrashAlt} from "react-icons/fa"
+import { BiDotsVerticalRounded } from "react-icons/bi"
+import { useSelector } from 'react-redux'
+import axios from 'axios'
+import moment from "moment"
+import { useNavigate } from 'react-router-dom'
+
+
+
+
+function Users() {
+  const naviagte = useNavigate()
+  const currentUser = useSelector((state)=>state.currentUser)
+ 
+  const [users , setUsers] = useState([])
+    const getPostfunction = async () => {
+    try {
+      const res = await axios.get("/api/users");
+setUsers(res.data.users);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+useEffect(() => {
+
+
+ getPostfunction()     
+}, [currentUser]);
+ 
+
+//  const deletePosts = async(id)=>{
+
+//   try {
+//     const res = await  axios.delete(`/api/users/${id}`)
+//     const dat = res.data()
+//      setUsers(posts.filter((p)=> p._id !==id));
+    
+    
+//   } catch (error) {
+//     console.log(error.message)
+    
+//   }
+//  }
+if(users.length <1){
+    return <h1>loading</h1>
+}
+  return (
+    <div className='space-y-4'>
+      <h1 className='text-2xl text-slate-800 font-bold hidden md:block'>manage users</h1>
+
+
+
+      {/* userslis */}
+
+      <div className='space-y-4'>
+      {users.map((user)=>(
+         <div key={user._id}    className=' p-4 border-r border-l border-blue-900 items-center flex gap-4 justify-betweeen'>
+        <div className='flex-1'>
+          <h1 className='text-xl font-bold'>{user.fullName}</h1>
+          <p className='text-slate-700 '> Registered on{moment(user.createdAt).format("d-MM-YYYY")}</p>
+
+        </div>
+        {/* desktop */}
+        <div className='hidden md:flex gap-2'>
+          {/* <Link to={`/dash/editpost/${post._id}`}className='p-2 hover:bg-gray-200 rounded-lg'>
+          <FaEdit size={20} className='text-slate-600'/> 
+          </Link> */}
+          <button
+        //    onClick={()=>deletePosts(post._id)}  
+            className='p-2 hover:bg-red-200 rounded-lg'>
+            <FaRegTrashAlt className='text-red-900'/>
+          </button>
+          
+        </div>
+        {/* mobile veiw */}
+        <div className='relative  md:hidden group'>
+          <button className='p-1 hover:bg-gray-200 transition-colors rounded-full '>
+            <BiDotsVerticalRounded/>
+          </button>
+          <div className='hidden group-hover:flex absolute top-8 right-0 flex-col gap-2  bg-white border-slate-200 shadow-lg w-32 rounded-lg '>
+            {/* <Link to= "/dash/editpost/:id" className='flex items-center gap-2 p-2 bg-gary-100'>
+            <FaEdit size={20}/> Edit
+            </Link> */}
+            <button 
+            //  onClick={()=>deletePosts(post._id)} 
+             className={` title ? && "animate-sping"  : flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md`}>
+              <FaRegTrashAlt size={20}/>delete
+            </button>
+
+          </div>
+
+        </div>
+        </div>
+        
+      ))}
+       
+        
+      </div>
+    </div>
+  )
+}
+
+export default Users
