@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 function Sidebar() {
   const currentUser =  useSelector((state)=>state.currentUser)
-  console.log(currentUser);
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
     const [isOpen , setIsOpen] = useState(true)

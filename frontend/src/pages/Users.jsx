@@ -31,21 +31,21 @@ useEffect(() => {
 }, [currentUser]);
 
 
- console.log(currentUser)
 
-//  const deletePosts = async(id)=>{
 
-//   try {
-//     const res = await  axios.delete(`/api/users/${id}`)
-//     const dat = res.data()
-//      setUsers(posts.filter((p)=> p._id !==id));
+ const deleteUser = (id)=>{
+
+  try {
+    const res = axios.delete(`/api/users/${id}`)
+    console.log(res.data);
+     setUsers(users.filter((user)=> user._id !==id));
     
     
-//   } catch (error) {
-//     console.log(error.message)
+  } catch (error) {
+    console.log(error.message)
     
-//   }
-//  }
+  }
+ }
 if(users.length <0){
     return <h1>loading</h1>
 }
@@ -71,7 +71,7 @@ if(users.length <0){
           <FaEdit size={20} className='text-slate-600'/> 
           </Link> */}
           <button
-        //    onClick={()=>deletePosts(post._id)}  
+           onClick={()=>deleteUser(user._id)}  
             className='p-2 hover:bg-red-200 rounded-lg'>
             <FaRegTrashAlt className='text-red-900'/>
           </button>
