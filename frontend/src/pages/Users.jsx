@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 
+
 function Users() {
   const naviagte = useNavigate()
   const currentUser = useSelector((state)=>state.currentUser)
@@ -49,6 +50,28 @@ useEffect(() => {
 if(users.length <0){
     return <h1>loading</h1>
 }
+//update is admin
+const updateIsAdmin = async({id , isAdmin , isActivated})=>{
+  const res = await fetch(`/api/users/${id}`,{
+    method: "PUT",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({isAdmin , isActivated:isActivated})
+  });
+ 
+  const data = await  res.json()
+  getPostfunction()
+}
+//update is admin
+const updateisActivated = async({id , isAdmin , isActivated})=>{
+  const res = await fetch(`/api/users/${id}`,{
+    method: "PUT",
+    headers:{"Content-Type":"aplication/json"},
+    body: JSON.stringify({isAdmin , isActivated:isActivated})
+  });
+ 
+  const data = await  res.json()
+  getPostfunction()
+}
   return (
     <div className='space-y-4'>
       <h1 className='text-2xl text-slate-800 font-bold hidden md:block'>manage users</h1>
@@ -67,9 +90,34 @@ if(users.length <0){
         </div>
         {/* desktop */}
         <div className='hidden md:flex gap-2'>
-          {/* <Link to={`/dash/editpost/${post._id}`}className='p-2 hover:bg-gray-200 rounded-lg'>
-          <FaEdit size={20} className='text-slate-600'/> 
-          </Link> */}
+          <div className='p-2 hover:bg-gray-200 rounded-lg'>
+       {user.isAdmin ?(
+        <button  
+        
+        
+         className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md transition"
+        onClick=
+         
+         {()=>updateIsAdmin({
+          id:user._id ,
+           isAdmin: false ,
+            isActivated:user.isActivated
+          })}
+        
+        >Make User</button>
+       ): (
+         <button    className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-md transition"
+          onClick=
+         
+         {()=>updateIsAdmin({
+          id:user._id ,
+           isAdmin: true ,
+            isActivated:user.isActivated
+          })}>Make Admin </button> )
+       }
+
+
+          </div>
           <button
            onClick={()=>deleteUser(user._id)}  
             className='p-2 hover:bg-red-200 rounded-lg'>
@@ -83,15 +131,35 @@ if(users.length <0){
             <BiDotsVerticalRounded/>
           </button>
           <div className='hidden group-hover:flex absolute top-8 right-0 flex-col gap-2  bg-white border-slate-200 shadow-lg w-32 rounded-lg '>
-            {/* <Link to= "/dash/editpost/:id" className='flex items-center gap-2 p-2 bg-gary-100'>
-            <FaEdit size={20}/> Edit
-            </Link> */}
-            <button 
-            //  onClick={()=>deletePosts(post._id)} 
-             className={` title ? && "animate-sping"  : flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md`}>
-              <FaRegTrashAlt size={20}/>delete
-            </button>
-
+            {user.isAdmin ?(
+        <button  
+        
+        
+         className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md transition"
+        onClick=
+         
+         {()=>updateIsAdmin({
+          id:user._id ,
+           isAdmin: false ,
+            isActivated:user.isActivated
+          })}
+        
+        >To User</button>
+       ): (
+         <button    className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-md transition"
+          onClick=
+         
+         {()=>updateIsAdmin({
+          id:user._id ,
+           isAdmin: true ,
+            isActivated:user.isActivated
+          })}> To Admin </button> )
+       }
+            <button
+           onClick={()=>deleteUser(user._id)}  
+            className='p-2 hover:bg-red-200 rounded-lg'>
+            <FaRegTrashAlt className='text-red-900'/>
+          </button>
           </div>
 
         </div>

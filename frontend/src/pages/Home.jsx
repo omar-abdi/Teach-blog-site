@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Hero from './Hero'
 import GridPost from './GridPost';
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
 function Home() {
    const [post, setPost] = useState(null);
@@ -25,12 +26,15 @@ function Home() {
 }
     
   return (
+    <>
     <div className='container mx-auto overflow-hidden p-4'>
 <Hero post = {post}/>
   <h1 className='text-2xl '>Resent Posts</h1>
   <GridPost  isHome = {true} posts ={posts}/>
   <Link className='bg-slate-700 rounded-lg px-6 py-2 shadow-lg text-white'>se more</Link >
     </div>
+    <Footer/>
+    </>
   )
 }
 

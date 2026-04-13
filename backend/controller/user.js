@@ -56,3 +56,31 @@ status: "fail",
         
     }
 }
+
+//update user isAdmin or is Activated
+
+
+export const UpdateUser = async(req , res)=>{
+try {
+     const {isAdmin , isActivated} = req.body
+   const id = req.params.id;
+
+    const  updatedUser = await User.findByIdAndUpdate(id, {isAdmin , isActivated} , {new : true}).select("-password")
+    if(!updatedUser){
+        return  res.status(404).json({
+            message: "not found user"
+        })
+    }
+ return res.status(200).json({
+    message : "updated successfully",
+    updatedUser
+ })
+} catch (error) {
+       return res.status(500).json({
+        message : "error accur to update  user" ,
+    
+    })
+    console.log(error.message)
+        
+    }
+}
