@@ -44,6 +44,13 @@ const handleSubmit = async(e)=>{
     console.log(error.message)
     
   }
+setFormData({
+   title :"",
+    category: "",
+    content: "",
+    image : null
+
+})
 }
 
 ///naviagate(`/blogs/${data._id}`)

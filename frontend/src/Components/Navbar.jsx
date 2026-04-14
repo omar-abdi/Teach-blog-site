@@ -12,7 +12,9 @@ const currentUser = useSelector((state)=> state.currentUser)
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
         
         {/* Logo */}
+       <Link to="/">
         <h1 className="text-xl font-bold">Teach-web</h1>
+       </Link>
 {/* desktop desin */}
         <div className="hidden md:flex gap-6">
           <Link to="/">Home</Link>

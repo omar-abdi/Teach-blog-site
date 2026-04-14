@@ -4,6 +4,7 @@ import "react-quill-new/dist/quill.snow.css"
 import ReactQuill from 'react-quill-new'
 import {  useParams } from 'react-router-dom'
 import axios from 'axios'
+import Footer from './Footer'
 
 function Editpost() {
 
@@ -68,6 +69,7 @@ useEffect(()=>{
   fillFormData()
 },[posts])
   return (
+    <>
     <div className='p-4 flex-1 max-w-4xl mx-auto'>
   <div className='space-y-2 mb-4 '>
     <h1 className='text-2xl text-slate-800 font-bold'>Your Posts</h1>
@@ -105,6 +107,8 @@ useEffect(()=>{
     <button  type='submit'       className='w-full md:w-1/2 bg-gray-700 shadow-lg rounded-lg px-6 py-3 text-white hover:bg-gray-900'>Post </button>
   </form>
     </div>
+    <Footer/>
+    </>
   )
 }
 
