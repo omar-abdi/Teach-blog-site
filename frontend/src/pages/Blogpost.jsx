@@ -38,9 +38,9 @@ useEffect(()=>{
 
   {/* Author + Date */}
   <div className="flex items-center gap-4 text-gray-500 text-sm mt-3">
-    <span>
-      By <span className="font-semibold text-gray-700">
-        {post?.Author?.fullName}
+    <span   className="font-bold  text-lg text-gray-900">
+      By <span className="font-bold  text-lg text-gray-900">
+        {post?.Author?.fullName}      Cali
       </span>
     </span>
 

@@ -26,8 +26,8 @@ function BlogCrad({blog}) {
   </h3>
 
  
-  <div className='mt-3 flex items-center justify-between border-t border-[#e7ede7] pt-3 text-sm text-[#687871]'>
-    <span>by {blog.Author?.fullName}</span>
+  <div className='mt-3 flex items-center justify-between border-t border-[#e7ede7] pt-3 text-lg font-bold text-[#687871]'>
+    <span      className="font-bold text-gray-700 font-bold">{}By {blog.Author?.fullName}</span>
     <span>{moment(blog.createdAt).format("DD MMM YYYY")}</span>
   </div>
 
