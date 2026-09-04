@@ -5,28 +5,28 @@ function BlogCrad({blog}) {
   return ( 
     <Link 
   to={`/blogs/${blog._id}`}    
-  className='block max-w-md mx-auto bg-white border border-gray-200 rounded-2xl p-4 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 r'
+  className='group block mx-auto overflow-hidden rounded-2xl border border-[#dfe7df] bg-white p-3 shadow-[0_8px_30px_rgba(23,34,31,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(23,34,31,0.12)]'
 >
 
-  <div className="flex justify-center mb-4">
+  <div className="mb-5 overflow-hidden rounded-xl">
     <img 
       src={blog.image} 
       alt="" 
-      className='w-[90%] h-52 object-cover rounded-xl shadow-md'
+      className='h-56 w-full object-cover transition duration-500 group-hover:scale-105'
     />
   </div>
 
 
-  <span className='inline-block bg-slate-800 text-white text-sm px-3 py-1 rounded-full mb-3'>
+  <span className='mb-3 inline-block rounded-full bg-[#d8eee8] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#138a78]'>
     {blog.category}
   </span>
 
-  <h3 className='text-lg md:text-xl font-semibold text-slate-800 mb-2 leading-snug'>
+  <h3 className='mb-2 text-lg font-bold leading-snug text-[#17221f] md:text-xl'>
     {blog.title}
   </h3>
 
  
-  <div className='flex items-center justify-between text-sm text-gray-500 border-t pt-3 mt-3'>
+  <div className='mt-3 flex items-center justify-between border-t border-[#e7ede7] pt-3 text-sm text-[#687871]'>
     <span>by {blog.Author?.fullName}</span>
     <span>{moment(blog.createdAt).format("DD MMM YYYY")}</span>
   </div>

@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import {Link} from "react-router-dom"
-import {FaEdit, FaRegTrashAlt} from "react-icons/fa"
-import { BiDotsVerticalRounded } from "react-icons/bi"
+import { FaRegTrashAlt } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
-import moment from "moment"
-import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
 
 
 
 
 function Users() {
-  const naviagte = useNavigate()
-  const currentUser = useSelector((state)=>state.currentUser)
- 
-  const [users , setUsers] = useState([])
+  const currentUser = useSelector((state) => state.currentUser)
+  const [users, setUsers] = useState([])
     const getPostfunction = async () => {
     try {
       const res = await axios.get("/api/users");
@@ -73,29 +68,45 @@ const updateisActivated = async({id , isAdmin , isActivated})=>{
   getPostfunction()
 }
   return (
-    <div className='space-y-4'>
-      <h1 className='text-2xl text-slate-800 font-bold hidden md:block'>manage users</h1>
+    <div className='min-h-screen bg-[#f5f7f2] p-1 sm:p-4'>
+      <div className='mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between'>
+        <div>
+          <p className='text-xs font-bold uppercase tracking-[0.28em] text-[#138a78]'>Workspace</p>
+          <h1 className='mt-2 text-3xl font-black tracking-tight text-[#17221f]'>Manage users</h1>
+          <p className='mt-2 text-sm text-[#687871]'>Review members and manage access permissions.</p>
+        </div>
+        <div className='w-fit rounded-2xl border border-[#d8e0d8] bg-white px-5 py-3 shadow-sm'>
+          <p className='text-xs font-bold uppercase tracking-wider text-[#687871]'>Total members</p>
+          <p className='mt-1 text-2xl font-black text-[#17221f]'>{users.length}</p>
+        </div>
+      </div>
 
 
 
       {/* userslis */}
 
-      <div className='space-y-4'>
+      <div className='space-y-3'>
       {users.map((user)=>(
-         <div key={user._id}    className=' p-4 border-r border-l border-blue-900 items-center flex gap-4 justify-betweeen'>
-        <div className='flex-1'>
-          <h1 className='text-xl font-bold'>{user.fullName}</h1>
-          <p className='text-slate-700 '> Registered on{moment(user.createdAt).format("d-MM-YYYY")}</p>
+         <div key={user._id} className='group flex items-center gap-4 rounded-2xl border border-[#dfe7df] bg-white p-4 shadow-[0_8px_24px_rgba(23,34,31,0.05)] transition hover:border-[#b9d8d0] hover:shadow-[0_14px_30px_rgba(23,34,31,0.09)] sm:p-5'>
+        <div className='flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#d8eee8] text-lg font-black text-[#138a78]'>
+          {user.fullName?.charAt(0)?.toUpperCase()}
+        </div>
+        <div className='min-w-0 flex-1'>
+          <h1 className='truncate text-base font-bold text-[#17221f] sm:text-lg'>{user.fullName}</h1>
+          <p className='mt-1 text-xs text-[#687871] sm:text-sm'>Registered {moment(user.createdAt).format("DD MMM YYYY")}</p>
+          <span className={`mt-2 inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${user.isAdmin ? 'bg-[#fff0d9] text-[#a86418]' : 'bg-[#edf2ed] text-[#687871]'}`}>
+            {user.isAdmin ? 'Administrator' : 'Member'}
+          </span>
 
         </div>
         {/* desktop */}
-        <div className='hidden md:flex gap-2'>
-          <div className='p-2 hover:bg-gray-200 rounded-lg'>
+        <div className='hidden items-center gap-2 md:flex'>
+          <div className='p-1'>
        {user.isAdmin ?(
         <button  
         
         
-         className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md transition"
+         className="rounded-xl bg-[#fff0ed] px-4 py-2 text-xs font-bold text-[#b34e42] transition hover:bg-[#b34e42] hover:text-white"
         onClick=
          
          {()=>updateIsAdmin({
@@ -106,7 +117,7 @@ const updateisActivated = async({id , isAdmin , isActivated})=>{
         
         >Make User</button>
        ): (
-         <button    className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-md transition"
+         <button    className="rounded-xl bg-[#d8eee8] px-4 py-2 text-xs font-bold text-[#138a78] transition hover:bg-[#138a78] hover:text-white"
           onClick=
          
          {()=>updateIsAdmin({
@@ -120,22 +131,22 @@ const updateisActivated = async({id , isAdmin , isActivated})=>{
           </div>
           <button
            onClick={()=>deleteUser(user._id)}  
-            className='p-2 hover:bg-red-200 rounded-lg'>
-            <FaRegTrashAlt className='text-red-900'/>
+            className='rounded-xl p-3 transition hover:bg-[#fff0ed]'>
+            <FaRegTrashAlt className='text-[#b34e42]'/>
           </button>
           
         </div>
         {/* mobile veiw */}
-        <div className='relative  md:hidden group'>
-          <button className='p-1 hover:bg-gray-200 transition-colors rounded-full '>
-            <BiDotsVerticalRounded/>
+        <div className='relative md:hidden group'>
+          <button className='rounded-xl border border-[#d8e0d8] p-2 text-[#687871] transition hover:bg-[#edf2ed]'>
+            {/* <BiDotsVerticalRounded/> */}
           </button>
-          <div className='hidden group-hover:flex absolute top-8 right-0 flex-col gap-2  bg-white border-slate-200 shadow-lg w-32 rounded-lg '>
+          <div className='absolute right-0 top-10 z-10 hidden w-36 flex-col gap-2 rounded-2xl border border-[#dfe7df] bg-white p-2 shadow-xl group-hover:flex'>
             {user.isAdmin ?(
         <button  
         
         
-         className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md transition"
+         className="rounded-xl bg-[#fff0ed] px-3 py-2 text-xs font-bold text-[#b34e42] transition hover:bg-[#b34e42] hover:text-white"
         onClick=
          
          {()=>updateIsAdmin({
@@ -146,7 +157,7 @@ const updateisActivated = async({id , isAdmin , isActivated})=>{
         
         >To User</button>
        ): (
-         <button    className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-md transition"
+         <button    className="rounded-xl bg-[#d8eee8] px-3 py-2 text-xs font-bold text-[#138a78] transition hover:bg-[#138a78] hover:text-white"
           onClick=
          
          {()=>updateIsAdmin({
@@ -157,8 +168,8 @@ const updateisActivated = async({id , isAdmin , isActivated})=>{
        }
             <button
            onClick={()=>deleteUser(user._id)}  
-            className='p-2 hover:bg-red-200 rounded-lg'>
-            <FaRegTrashAlt className='text-red-900'/>
+            className='rounded-xl p-2 transition hover:bg-[#fff0ed]'>
+            <FaRegTrashAlt className='text-[#b34e42]'/>
           </button>
           </div>
 

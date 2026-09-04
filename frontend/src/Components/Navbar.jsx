@@ -8,19 +8,19 @@ import { useSelector } from 'react-redux'
   const [open, setOpen] = useState(false);
 const currentUser = useSelector((state)=> state.currentUser)
   return (
-    <nav className="bg-gray-800 text-white shadow-md z-100">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+    <nav className="sticky top-0 z-50 border-b border-[#dfe7df] bg-[#f5f7f2]/95 text-[#17221f] shadow-sm backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
         
         {/* Logo */}
        <Link to="/">
-        <h1 className="text-xl font-bold">Teach-web</h1>
+        <h1 className="text-xl font-black tracking-tight"><span className="text-[#138a78]">Teach</span><span className="text-[#17221f]">.web</span></h1>
        </Link>
 {/* desktop desin */}
-        <div className="hidden md:flex gap-6">
-          <Link to="/">Home</Link>
-          <Link to="/blogs">Blogs</Link>
-          <Link to="/contact">Contact</Link>
-          {!currentUser  ?   <Link to="/login">Sign in</Link>  : <Link to="/dash">Dashbroad</Link>
+        <div className="hidden items-center gap-8 text-sm font-semibold md:flex">
+          <Link className="transition hover:text-[#138a78]" to="/">Home</Link>
+          <Link className="transition hover:text-[#138a78]" to="/blogs">Blogs</Link>
+          <Link className="transition hover:text-[#138a78]" to="/contact">Contact</Link>
+          {!currentUser  ?   <Link className="rounded-full bg-[#17221f] px-5 py-2.5 text-white transition hover:bg-[#138a78]" to="/login">Sign in</Link>  : <Link className="rounded-full bg-[#17221f] px-5 py-2.5 text-white transition hover:bg-[#138a78]" to="/dash">Dashboard</Link>
           
         }
          
@@ -28,7 +28,7 @@ const currentUser = useSelector((state)=> state.currentUser)
 
         {/* Mobile Button */}
         <button 
-          className="md:hidden text-2xl"
+          className="rounded-xl border border-[#d8e0d8] px-3 py-1 text-xl md:hidden"
           onClick={() => setOpen(!open)}
         >
           ☰
@@ -37,7 +37,7 @@ const currentUser = useSelector((state)=> state.currentUser)
 
       {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden flex flex-col gap-4 px-4 pb-4 bg-blue-600">
+        <div className="flex flex-col gap-4 border-t border-[#dfe7df] bg-white px-5 pb-5 pt-4 text-sm font-semibold md:hidden">
           <Link to="/" onClick={() => setOpen(false)}>Home</Link>
           <Link to="/blogs" onClick={() => setOpen(false)}>Blogs</Link>
           <Link to="/contact" onClick={() => setOpen(false)}>Contact</Link>

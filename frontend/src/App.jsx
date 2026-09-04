@@ -19,7 +19,7 @@ function App() {
 
   const currentUser = useSelector((state)=> state.currentUser)
   return (
-    <div className='font-mono'>
+    <div className='min-h-screen bg-[#f5f7f2] font-sans text-[#17221f]'>
     
 
 
